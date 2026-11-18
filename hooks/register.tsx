@@ -38,7 +38,7 @@ export const register: Register = on => {
     }
     const { Svg } = $.ui.resolve(e)
 
-    return <Svg source={SCENE} alt="A space battle: a capital ship drifts past as fighter squadrons trade laser fire" isInteractive />
+    return <Svg source={SCENE} alt="A hooded dark lord with a red blade watches a space battle" isInteractive />
   })
 
   on('session.start', async ($, e, next) => {
