@@ -1,0 +1,5 @@
+{
+  "name": "nightfleet-theme",
+  "owner": { "name": "housemoneyproperties-create" },
+  "plugins": [{ "name": "nightfleet", "source": "./", "description": "Night Fleet theme: a dark, red space-opera battle behind your Claude Code chat" }]
+}
