@@ -28,7 +28,7 @@ const { theme, problems } = makeColors({
 const LOOK: ThemeSetArgs = {
   colors: theme,
   // Thin frosting so the battle shows through while the words stay readable.
-  backdrop: { scene: 'nightfleet', glass: { blur: 3, opacity: 0.25 } },
+  backdrop: { scene: 'nightfleet', glass: { blur: 0, opacity: 0.2 } },
 }
 
 export const register: Register = on => {
