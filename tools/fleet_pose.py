@@ -10,26 +10,26 @@ s = open(src_path, encoding='utf-8').read()
 head, svg, tail = s[:s.index('`') + 1], s[s.index('`') + 1:s.rindex('`')], s[s.rindex('`'):]
 root = ET.fromstring(svg)
 
-C = 20  # seconds per pose cycle
+C = 45  # seconds per pose cycle
 SH = (-136, -494)    # shoulder pivot (lord units)
 HI = (-223.8, -271.2)  # hilt / wrist pivot
 # arm angle over the cycle: idle, raise, hold high, slash past rest, settle
-ARM = [(0, 0), (66, 0), (74, 128), (76, 122), (84, 126), (86.2, -26), (88, -14), (90.5, 4), (93, 0), (100, 0)]
-WRIST = [(0, 0), (66, 0), (72, -22), (75, 14), (84, 10), (85.6, 30), (87.4, -12), (90, 3), (93, 0), (100, 0)]
-LEAN = [(0, 0), (66, 0), (74, -2.2), (84, -2.6), (86.4, 2.8), (90, -.6), (94, 0), (100, 0)]
-CAPE = [(0, 0), (66, 0), (74, 2), (84, 2.5), (86.6, -1), (88.4, -7), (91, 3.5), (94, -1.2), (97, 0), (100, 0)]
+ARM = [(0, 0), (77.8, 0), (83.6, 58), (85, 55), (89.8, 57, 'cubic-bezier(.55,0,.85,.4)'), (91.1, -12), (92.4, 3), (96, 0), (100, 0)]
+WRIST = [(0, 0), (77.8, 0), (83.6, 100), (85, 97), (89.6, 102, 'cubic-bezier(.55,0,.85,.4)'), (90.9, -18), (92.4, 4), (96, 0), (100, 0)]
+LEAN = [(0, 0), (77.8, 0), (83.6, -1.2), (89.8, -1.4), (91.1, 1.6), (94, 0), (100, 0)]
+CAPE = [(0, 0), (77.8, 0), (83.6, 1), (89.8, 1), (91.3, -1), (92.6, -4.5), (94.6, 2), (96.8, -.6), (98.5, 0), (100, 0)]
 
 def kf(name, pts, fmt):
-    return '@keyframes %s{%s}' % (name, ''.join('%s%%{transform:%s}' % (('%.1f' % p).rstrip('0').rstrip('.'), fmt % v) for p, v in pts))
+    return '@keyframes %s{%s}' % (name, ''.join('%s%%{transform:%s%s}' % (('%.1f' % q[0]).rstrip('0').rstrip('.'), fmt % q[1], (';animation-timing-function:' + q[2]) if len(q) > 2 else '') for q in pts))
 
 css = ('.pArm{animation:pArm %(c)ss cubic-bezier(.45,0,.4,1) infinite}\n'
        '.pWr{animation:pWr %(c)ss ease-in-out infinite}\n'
        '.pLean{animation:pLean %(c)ss ease-in-out infinite}\n'
        '.pCape{animation:pCape %(c)ss ease-in-out infinite;transform-box:fill-box;transform-origin:50%% 0}\n'
        '.pStreak{animation:pStreak %(c)ss linear infinite;opacity:0}\n'
-       '@keyframes pStreak{0%%,85%%{opacity:0}85.9%%{opacity:.9}87.2%%{opacity:.35}88.6%%,100%%{opacity:0}}\n'
+       '@keyframes pStreak{0%%,90.95%%{opacity:0}91.25%%{opacity:.8}92.2%%{opacity:.3}93%%,100%%{opacity:0}}\n'
        '.pFlare{animation:pFlare %(c)ss ease-in-out infinite;opacity:0}\n'
-       '@keyframes pFlare{0%%,70%%{opacity:0}75%%,84%%{opacity:1}87%%,100%%{opacity:0}}\n') % {'c': C}
+       '@keyframes pFlare{0%%,78%%{opacity:0}83.6%%,89.8%%{opacity:1}91.5%%,100%%{opacity:0}}\n') % {'c': C}
 css += kf('pArm', ARM, 'rotate(%gdeg)') + '\n' + kf('pWr', WRIST, 'rotate(%gdeg)') + '\n' \
     + kf('pLean', LEAN, 'rotate(%gdeg)') + '\n' + kf('pCape', CAPE, 'skewX(%gdeg)') + '\n'
 style = root.find(NS + 'style')
@@ -90,9 +90,17 @@ st = ET.Element(NS + 'g', {'class': 'pStreak'})
 a0, a1 = 78, -22
 outer = [rot(a0 + (a1 - a0) * k / 24) for k in range(25)]
 inner = [hil(a0 + (a1 - a0) * k / 24) for k in range(25)][::-1]
-ET.SubElement(st, NS + 'path', {'d': arc(a0, a1), 'stroke': '#ff3a40', 'stroke-width': '12', 'stroke-opacity': '.3',
+def R(p, c, a):
+    r = math.radians(a); x, y = p[0] - c[0], p[1] - c[1]
+    return c[0] + x * math.cos(r) - y * math.sin(r), c[1] + x * math.sin(r) + y * math.cos(r)
+def tipat(f):  # f 0..1 through the slash
+    arm = 57 + (-12 - 57) * f; wr = 102 + (-18 - 102) * f
+    return R(R(tip, HI, wr), SH, arm)
+def path(f0, f1, n=24):
+    return 'M' + ' L'.join('%.1f,%.1f' % tipat(f0 + (f1 - f0) * k / n) for k in range(n + 1))
+ET.SubElement(st, NS + 'path', {'d': path(.05, 1), 'stroke': '#ff3a40', 'stroke-width': '12', 'stroke-opacity': '.3',
                                 'fill': 'none', 'stroke-linecap': 'round'})
-ET.SubElement(st, NS + 'path', {'d': arc(38, a1), 'stroke': '#ffd6cc', 'stroke-width': '3', 'stroke-opacity': '.8',
+ET.SubElement(st, NS + 'path', {'d': path(.45, 1), 'stroke': '#ffd6cc', 'stroke-width': '3', 'stroke-opacity': '.75',
                                 'fill': 'none', 'stroke-linecap': 'round'})
 kids = list(lord)
 lord.insert(kids.index(bladeG), st)
