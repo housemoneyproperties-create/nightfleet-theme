@@ -49,7 +49,7 @@ python3 tools/gen_fleet.py /tmp hooks/scene.ts
 Since 0.3.0 the scene also carries edits made on top of the generated file: smoother motion
 (star and nebula drift off, slower flicker), a fuller left side, original ships, a smooth gray
 battle station that charges for a minute and blows the moon apart, and a dark lord who raises
-his blade into a pose and slashes every 45 seconds. Those come from post-processing scripts run
+his blade into a pose and slashes to fire the beam, all on one 60-second cycle. Those come from post-processing scripts run
 in order on the generated file, plus a few hand edits, so rerunning `gen_fleet.py` alone drops them:
 
 ```bash

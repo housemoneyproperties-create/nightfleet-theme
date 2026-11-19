@@ -89,18 +89,18 @@ export const SCENE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 
 }
 @media (min-aspect-ratio:3/4) and (max-aspect-ratio:5/4){.lordPos{transform:translate(40px,0)}}
 @media (min-aspect-ratio:5/4){.lordPos{transform:translate(195px,0)}.planetPos{transform:translate(180px,0)}}
-.pArm{animation:pArm 45s cubic-bezier(.45,0,.4,1) infinite}
-.pWr{animation:pWr 45s ease-in-out infinite}
-.pLean{animation:pLean 45s ease-in-out infinite}
-.pCape{animation:pCape 45s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 0}
-.pStreak{animation:pStreak 45s linear infinite;opacity:0}
-@keyframes pStreak{0%,90.95%{opacity:0}91.25%{opacity:.8}92.2%{opacity:.3}93%,100%{opacity:0}}
-.pFlare{animation:pFlare 45s ease-in-out infinite;opacity:0}
-@keyframes pFlare{0%,78%{opacity:0}83.6%,89.8%{opacity:1}91.5%,100%{opacity:0}}
-@keyframes pArm{0%{transform:rotate(0deg)}77.8%{transform:rotate(0deg)}83.6%{transform:rotate(58deg)}85%{transform:rotate(55deg)}89.8%{transform:rotate(57deg);animation-timing-function:cubic-bezier(.55,0,.85,.4)}91.1%{transform:rotate(-12deg)}92.4%{transform:rotate(3deg)}96%{transform:rotate(0deg)}100%{transform:rotate(0deg)}}
-@keyframes pWr{0%{transform:rotate(0deg)}77.8%{transform:rotate(0deg)}83.6%{transform:rotate(100deg)}85%{transform:rotate(97deg)}89.6%{transform:rotate(102deg);animation-timing-function:cubic-bezier(.55,0,.85,.4)}90.9%{transform:rotate(-18deg)}92.4%{transform:rotate(4deg)}96%{transform:rotate(0deg)}100%{transform:rotate(0deg)}}
-@keyframes pLean{0%{transform:rotate(0deg)}77.8%{transform:rotate(0deg)}83.6%{transform:rotate(-1.2deg)}89.8%{transform:rotate(-1.4deg)}91.1%{transform:rotate(1.6deg)}94%{transform:rotate(0deg)}100%{transform:rotate(0deg)}}
-@keyframes pCape{0%{transform:skewX(0deg)}77.8%{transform:skewX(0deg)}83.6%{transform:skewX(1deg)}89.8%{transform:skewX(1deg)}91.3%{transform:skewX(-1deg)}92.6%{transform:skewX(-4.5deg)}94.6%{transform:skewX(2deg)}96.8%{transform:skewX(-0.6deg)}98.5%{transform:skewX(0deg)}100%{transform:skewX(0deg)}}
+.pArm{animation:pArm 60s cubic-bezier(.45,0,.4,1) infinite}
+.pWr{animation:pWr 60s ease-in-out infinite}
+.pLean{animation:pLean 60s ease-in-out infinite}
+.pCape{animation:pCape 60s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 0}
+.pStreak{animation:pStreak 60s linear infinite;opacity:0}
+@keyframes pStreak{0%,77.13%{opacity:0}77.35%{opacity:.8}78.07%{opacity:.3}78.67%,100%{opacity:0}}
+.pFlare{animation:pFlare 60s ease-in-out infinite;opacity:0}
+@keyframes pFlare{0%,67.42%{opacity:0}71.62%,76.27%{opacity:1}77.54%,100%{opacity:0}}
+@keyframes pArm{0%{transform:rotate(0deg)}67.3%{transform:rotate(0deg)}71.6%{transform:rotate(58deg)}72.7%{transform:rotate(55deg)}76.3%{transform:rotate(57deg);animation-timing-function:cubic-bezier(.55,0,.85,.4)}77.2%{transform:rotate(-12deg)}78.2%{transform:rotate(3deg)}80.9%{transform:rotate(0deg)}100%{transform:rotate(0deg)}}
+@keyframes pWr{0%{transform:rotate(0deg)}67.3%{transform:rotate(0deg)}71.6%{transform:rotate(100deg)}72.7%{transform:rotate(97deg)}76.1%{transform:rotate(102deg);animation-timing-function:cubic-bezier(.55,0,.85,.4)}77.1%{transform:rotate(-18deg)}78.2%{transform:rotate(4deg)}80.9%{transform:rotate(0deg)}100%{transform:rotate(0deg)}}
+@keyframes pLean{0%{transform:rotate(0deg)}67.3%{transform:rotate(0deg)}71.6%{transform:rotate(-1.2deg)}76.3%{transform:rotate(-1.4deg)}77.2%{transform:rotate(1.6deg)}79.4%{transform:rotate(0deg)}100%{transform:rotate(0deg)}}
+@keyframes pCape{0%{transform:skewX(0deg)}67.3%{transform:skewX(0deg)}71.6%{transform:skewX(1deg)}76.3%{transform:skewX(1deg)}77.4%{transform:skewX(-1deg)}78.4%{transform:skewX(-4.5deg)}79.9%{transform:skewX(2deg)}81.5%{transform:skewX(-0.6deg)}82.8%{transform:skewX(0deg)}100%{transform:skewX(0deg)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}.bolt,.tbolt,.boom,.jump,.kill,.ember{opacity:0}}
 .hood-cape{animation:hood-cape 11s ease-in-out infinite;transform-box:fill-box;transform-origin:20% 0}@keyframes hood-cape{50%{transform:skewX(1.5deg) scaleX(1.02)}}.hood-hem{animation:hood-hem 11s ease-in-out -2s infinite;transform-box:fill-box;transform-origin:50% 0}@keyframes hood-hem{50%{transform:translateX(4px) scaleX(1.025)}}.hood-breath{animation:hood-breath 6s ease-in-out infinite}@keyframes hood-breath{0%,100%{transform:translateY(0)}45%{transform:translateY(-3px)}}.hood-eye{animation:hood-eye 7s ease-in-out -2.5s infinite}@keyframes hood-eye{0%,100%{opacity:.3}40%,60%{opacity:1}}.hood-hum{animation:hood-hum 2.7s ease-in-out infinite}@keyframes hood-hum{0%,100%{opacity:.8}50%{opacity:1}}
 @keyframes fr0{0%,79.3%{opacity:0;transform:translate(0,0) rotate(0)}79.65%{opacity:1;transform:translate(43px,10px) rotate(-15deg)}91%{opacity:.85}95%,100%{opacity:0;transform:translate(362px,87px) rotate(-149deg)}}
